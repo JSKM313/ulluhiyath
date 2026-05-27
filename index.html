@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ulluhiyath Calculator — Bakreed</title>
+<title>Mongam Mahallu Ulluhiyath Calculator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
@@ -143,8 +143,9 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
 </div>
 
 <div class="page-title">
-  <h1>☽ Ulluhiyath Calculator</h1>
-  <p>Bakreed Beef Allocation — Mahall Distribution System</p>
+  <h1>☽ Mongam Mahallu Ulluhiyath Calculator</h1>
+  <p>Bakreed Buffalo Allocation — Mahall Distribution System</p>
+  <p style="font-size:12px;color:#085041;font-family:sans-serif;margin-top:3px;font-weight:600;letter-spacing:.03em">Sponsored by SKSSF Mongam Unit</p>
 </div>
 
 <div class="app-wrap">
@@ -152,8 +153,8 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
     <div class="header-pattern"></div>
     <div class="header-icon"><i class="ti ti-moon-stars"></i></div>
     <div class="header-text">
-      <div class="header-title">Ulluhiyath Calculator</div>
-      <div class="header-sub">Bakreed beef allocation — mahall distribution</div>
+      <div class="header-title">Mongam Mahallu Ulluhiyath</div>
+      <div class="header-sub">Bakreed buffalo allocation calculator</div>
     </div>
     <div class="header-deco">✦ ☽ ✦</div>
   </div>
@@ -177,7 +178,7 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
       <div class="area-grid" id="area-grid"></div>
     </div>
     <div class="card" id="cow-card" style="display:none">
-      <div class="section-head"><i class="ti ti-beef"></i><span id="cow-card-lbl">Select cow</span></div>
+      <div class="section-head"><i class="ti ti-beef"></i><span id="cow-card-lbl">Select buffalo</span></div>
       <div class="cow-grid" id="cow-grid"></div>
     </div>
     <div id="cow-calc"></div>
@@ -189,14 +190,10 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
       <div style="overflow-x:auto">
         <table class="atbl">
           <thead><tr>
-            <th style="width:26%">Area</th>
-            <th style="width:8%;text-align:center">Cows</th>
-            <th style="width:13%;text-align:right">Pub. meat</th>
-            <th style="width:13%;text-align:right">Pub. bone</th>
-            <th style="width:12%;text-align:right">Public</th>
-            <th style="width:13%;text-align:right">SH meat</th>
-            <th style="width:13%;text-align:right">SH bone</th>
-            <th style="width:2%;text-align:right">SH</th>
+            <th style="width:40%">Area</th>
+            <th style="width:20%;text-align:right">ഇറച്ചി (kg)</th>
+            <th style="width:20%;text-align:right">എല്ല് (kg)</th>
+            <th style="width:20%;text-align:right">ആകെ (kg)</th>
           </tr></thead>
           <tbody id="area-tbody"></tbody>
         </table>
@@ -209,7 +206,7 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
     <div class="card" id="all-cows-card"></div>
   </div>
 
-  <div class="footer">✦ &nbsp; Eid Mubarak &nbsp; ✦ &nbsp; عيد مبارك &nbsp; ✦</div>
+  <div class="footer">✦ &nbsp; Eid Mubarak &nbsp; ✦ &nbsp; عيد مبارك &nbsp; ✦<br><span style="font-size:12px;font-weight:600;color:#085041;opacity:1">Sponsored by SKSSF Mongam Unit</span></div>
 </div>
 
 <script>
@@ -323,7 +320,7 @@ function renderAreaGrid(){
     const n=cows[a.code].length;
     const b=document.createElement('button');
     b.className='area-btn'+(selArea===a.code?' sel':'');
-    b.innerHTML=`<span class="acode">${a.code}</span><span class="aname">${a.name}${n>0?` <span style="color:#1D9E75">(${n})</span>`:''}</span>`;
+    b.innerHTML=`<span class="acode">${a.code}</span><span class="aname">${a.name}${n>0?` <span style="color:#1D9E75">(${n} buffalo${n>1?'es':''})</span>`:''}</span>`;
     b.onclick=()=>{selArea=a.code;selCow=null;renderAreaGrid();renderCowGrid();renderCowCalc();};
     g.appendChild(b);
   });
@@ -334,7 +331,7 @@ function renderCowGrid(){
   const g=document.getElementById('cow-grid');
   if(!selArea){card.style.display='none';return;}
   card.style.display='flex';
-  document.getElementById('cow-card-lbl').textContent=`${selArea}: ${AREAS.find(x=>x.code===selArea).name}`;
+  document.getElementById('cow-card-lbl').textContent=`Buffaloes — ${selArea}: ${AREAS.find(x=>x.code===selArea).name}`;
   g.innerHTML='';
   cows[selArea].forEach((cow,i)=>{
     if(!cow) return;
@@ -348,7 +345,7 @@ function renderCowGrid(){
   });
   const add=document.createElement('button');
   add.className='add-chip';
-  add.innerHTML=`<i class="ti ti-plus" style="font-size:12px"></i> New cow`;
+  add.innerHTML=`<i class="ti ti-plus" style="font-size:12px"></i> New buffalo`;
   add.onclick=async()=>{
     const idx=cows[selArea].length;
     const newCow={id:selArea.toLowerCase()+(idx+1),meatRows:[{gross:'',bucket:'',hasBucket:false}],boneRows:[{gross:'',bucket:'',hasBucket:false}],meatDone:false,boneDone:false,shN:''};
@@ -500,12 +497,10 @@ function renderPage2(){
     });
     gMeat+=aMeat;gBone+=aBone;gPubM+=aMeat*2/3;gPubB+=aBone*2/3;
     const tr=document.createElement('tr');
-    tr.innerHTML=`<td><strong>${a.code}</strong> <span style="font-size:11px;color:#854F0B">${a.name}</span></td>
-      <td style="text-align:center"><span class="badge-gold">${(cows[a.code]||[]).length}</span></td>
-      <td class="num">${(aMeat*2/3).toFixed(3)}</td><td class="num">${(aBone*2/3).toFixed(3)}</td>
-      <td class="num" style="font-weight:700">${((aMeat+aBone)*2/3).toFixed(3)}</td>
-      <td class="num green">${(aMeat/3).toFixed(3)}</td><td class="num green">${(aBone/3).toFixed(3)}</td>
-      <td class="num green" style="font-weight:700">${((aMeat+aBone)/3).toFixed(3)}</td>`;
+    tr.innerHTML=`<td><strong style="color:#085041">${a.code}</strong> <span style="font-size:12px;color:#412402">${a.name}</span></td>
+      <td class="num">${aMeat.toFixed(3)}</td>
+      <td class="num">${aBone.toFixed(3)}</td>
+      <td class="num" style="font-weight:700;color:#085041;background:#FAEEDA">${(aMeat+aBone).toFixed(3)}</td>`;
     tbody.appendChild(tr);
   });
   document.getElementById('grand-metrics').innerHTML=`
@@ -516,18 +511,18 @@ function renderPage2(){
     <div class="metric"><label>Public bone (2/3)</label><span class="val">${gPubB.toFixed(2)}</span> <span class="unit">kg</span></div>
     <div class="metric"><label>Total public</label><span class="val">${(gPubM+gPubB).toFixed(2)}</span> <span class="unit">kg</span></div>`;
   const allCard=document.getElementById('all-cows-card');
-  if(!allRows.length){allCard.innerHTML=`<div style="font-size:13px;color:#854F0B;padding:4px">No cows entered yet.</div>`;return;}
-  allCard.innerHTML=`<div class="section-head" style="margin-bottom:8px"><i class="ti ti-list"></i>All cows</div>
+  if(!allRows.length){allCard.innerHTML=`<div style="font-size:13px;color:#854F0B;padding:4px">No buffaloes entered yet.</div>`;return;}
+  allCard.innerHTML=`<div class="section-head" style="margin-bottom:8px"><i class="ti ti-list"></i>All buffaloes</div>
     <div style="overflow-x:auto"><table class="atbl"><thead><tr>
-      <th>Cow</th><th>Area</th><th style="text-align:right">Meat</th><th style="text-align:right">Bone</th>
-      <th style="text-align:right">Pub. meat</th><th style="text-align:right">Pub. bone</th>
-      <th style="text-align:right">SH meat</th><th style="text-align:right">SH bone</th>
+      <th>Cow</th><th>Area</th><th style="text-align:right">Meat (kg)</th><th style="text-align:right">Bone (kg)</th><th style="text-align:right">Total (kg)</th><th style="text-align:right">Public (2/3)</th><th style="text-align:right">SH (1/3)</th>
     </tr></thead><tbody>
     ${allRows.map(c=>`<tr>
       <td style="font-weight:700;color:#085041">${c.id}</td><td>${c.area}</td>
-      <td class="num">${c.m.toFixed(3)}</td><td class="num">${c.b.toFixed(3)}</td>
-      <td class="num">${(c.m*2/3).toFixed(3)}</td><td class="num">${(c.b*2/3).toFixed(3)}</td>
-      <td class="num green">${(c.m/3).toFixed(3)}</td><td class="num green">${(c.b/3).toFixed(3)}</td>
+      <td class="num">${c.m.toFixed(3)}</td>
+      <td class="num">${c.b.toFixed(3)}</td>
+      <td class="num" style="font-weight:700">${(c.m+c.b).toFixed(3)}</td>
+      <td class="num">${((c.m+c.b)*2/3).toFixed(3)}</td>
+      <td class="num green">${((c.m+c.b)/3).toFixed(3)}</td>
     </tr>`).join('')}
     </tbody></table></div>`;
 }
