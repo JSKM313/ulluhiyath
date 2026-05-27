@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ulluhiyath Calculator — Bakreed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px;font-family:'Amiri',Georgia,serif}
+
+:root{
+  --gold:#BA7517;--gold-light:#FAEEDA;--gold-mid:#FAC775;
+  --green-deep:#085041;--green-mid:#1D9E75;--green-light:#E1F5EE;
+  --green-border:#0F6E56;--cream:#FAEEDA;
+}
+
+.page-title{text-align:center;margin-bottom:16px}
+.page-title h1{font-size:26px;font-weight:700;color:#085041;letter-spacing:.02em}
+.page-title p{font-size:13px;color:#854F0B;font-family:sans-serif;margin-top:4px;letter-spacing:.04em}
+
+.app-wrap{
+  background:#FAFAF7;border:1.5px solid #EF9F27;border-radius:16px;
+  overflow:hidden;width:100%;max-width:780px;
+}
+
+.app-header{
+  background:#085041;padding:14px 20px 10px;
+  display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;
+}
+.header-pattern{
+  position:absolute;inset:0;
+  background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 0,transparent 50%),
+    repeating-linear-gradient(-45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 0,transparent 50%);
+  background-size:20px 20px;pointer-events:none;
+}
+.header-icon{font-size:28px;color:#FAC775;flex-shrink:0}
+.header-text{display:flex;flex-direction:column;gap:2px}
+.header-title{font-size:20px;font-weight:700;color:#FAC775;line-height:1.1}
+.header-sub{font-size:12px;color:rgba(250,199,117,.65);font-family:sans-serif;letter-spacing:.04em}
+.header-deco{margin-left:auto;display:flex;gap:8px;align-items:center;opacity:.5;font-size:22px;color:#FAC775}
+
+.tab-bar{display:flex;background:#04342C;border-bottom:2px solid #EF9F27}
+.tab{
+  font-size:13px;font-family:sans-serif;padding:9px 20px;cursor:pointer;
+  color:rgba(250,199,117,.6);border-bottom:3px solid transparent;margin-bottom:-2px;
+  background:transparent;border-top:none;border-left:none;border-right:none;
+}
+.tab.active{color:#FAC775;border-bottom-color:#FAC775}
+.tab:hover{color:#FAC775}
+
+.page{display:none;flex-direction:column;gap:12px;padding:14px}
+.page.active{display:flex}
+
+.section-head{
+  display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;
+  font-family:sans-serif;color:#854F0B;text-transform:uppercase;letter-spacing:.06em;
+  padding-bottom:6px;border-bottom:1px dashed #FAC775;
+}
+.section-head i{font-size:14px;color:#BA7517}
+
+.card{
+  background:#fff;border:1px solid #EF9F27;border-radius:12px;
+  padding:12px 14px;display:flex;flex-direction:column;gap:10px;
+}
+
+.area-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:7px}
+.area-btn{
+  background:#FAFAF7;border:1px solid #EF9F27;border-radius:10px;
+  padding:9px 10px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:2px;
+  transition:all .15s;
+}
+.area-btn:hover,.area-btn.sel{background:#FAEEDA;border-color:#BA7517}
+.area-btn.sel{border-width:1.5px}
+.acode{font-size:20px;font-weight:700;color:#085041}
+.aname{font-size:11px;color:#854F0B;line-height:1.3;font-family:sans-serif}
+
+.cow-grid{display:flex;flex-wrap:wrap;gap:7px}
+.cow-chip{
+  background:#FAFAF7;border:1px solid #EF9F27;border-radius:20px;
+  padding:5px 14px;cursor:pointer;font-size:13px;color:#633806;font-family:sans-serif;
+}
+.cow-chip:hover,.cow-chip.sel{background:#085041;color:#FAC775;border-color:#085041}
+.cow-chip.done-chip{background:#E1F5EE;border-color:#1D9E75;color:#085041}
+.cow-chip.done-chip.sel{background:#085041;color:#FAC775}
+.add-chip{
+  background:transparent;border:1px dashed #BA7517;border-radius:20px;
+  padding:5px 14px;cursor:pointer;font-size:13px;color:#BA7517;
+  display:flex;align-items:center;gap:4px;font-family:sans-serif;
+}
+.add-chip:hover{background:#FAEEDA}
+
+.cow-block{border:1px solid #EF9F27;border-radius:12px;overflow:hidden;margin-top:4px}
+.cb-head{background:#085041;padding:9px 14px;display:flex;align-items:center;justify-content:space-between}
+.cname{font-size:15px;font-weight:700;color:#FAC775}
+.cname span{font-size:12px;font-weight:400;color:rgba(250,199,117,.7);font-family:sans-serif}
+.cb-body{padding:10px 12px;display:flex;flex-direction:column;gap:9px;background:#FAFAF7}
+
+.type-block{border:1px solid #EF9F27;border-radius:10px;overflow:hidden}
+.type-block.type-done{border-color:#1D9E75}
+.type-head{background:#FAEEDA;padding:6px 10px;display:flex;align-items:center;justify-content:space-between}
+.type-block.type-done .type-head{background:#E1F5EE}
+.type-lbl{font-size:12px;font-weight:600;color:#633806;font-family:sans-serif}
+.type-block.type-done .type-lbl{color:#085041}
+.type-body{padding:8px 10px;display:flex;flex-direction:column;gap:6px;background:#fff}
+
+.row-hdr{display:grid;grid-template-columns:1fr 1fr 64px 26px;gap:5px;font-size:11px;color:#854F0B;font-weight:600;padding:0 2px;font-family:sans-serif}
+.w-row{display:grid;grid-template-columns:1fr 1fr 64px 26px;gap:5px;align-items:center;margin-bottom:4px}
+.w-row input[type=number]{
+  width:100%;background:#FAFAF7;border:1px solid #EF9F27;border-radius:7px;
+  padding:7px 6px;font-size:16px;font-family:'Amiri',serif;color:#412402;text-align:center;
+  -moz-appearance:textfield;
+}
+.w-row input[type=number]::-webkit-inner-spin-button,.w-row input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+.w-row input[type=number]:focus{outline:none;border-color:#085041;box-shadow:0 0 0 2px rgba(8,80,65,.12)}
+.w-row input[type=number]:disabled{background:#F1EFE8;color:#B4B2A9;border-color:#D3D1C7}
+.net-cell{
+  font-size:14px;font-weight:700;color:#085041;text-align:center;
+  background:#E1F5EE;border-radius:7px;padding:7px 4px;font-family:'Amiri',serif;
+}
+.bkt-wrap{display:flex;flex-direction:column;gap:3px}
+.bkt-row{display:flex;align-items:center;gap:5px;font-size:12px;color:#854F0B;font-family:sans-serif}
+.bkt-row input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:#085041}
+
+.delbtn{background:transparent;border:none;cursor:pointer;color:#B4B2A9;font-size:14px;width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.delbtn:hover{color:#A32D2D;background:#FCEBEB}
+.delbtn:disabled{opacity:.3;cursor:default}
+
+.row-actions{display:flex;gap:6px;margin-top:2px}
+.addbtn{display:flex;align-items:center;gap:5px;font-size:12px;color:#854F0B;background:transparent;border:1px dashed #BA7517;border-radius:7px;padding:5px 10px;cursor:pointer;flex:1;font-family:sans-serif}
+.addbtn:hover{background:#FAEEDA}
+.addbtn:disabled{opacity:.4;cursor:default;pointer-events:none}
+.done-btn{display:flex;align-items:center;gap:4px;font-size:12px;background:#fff;border:1px solid #1D9E75;color:#085041;border-radius:7px;padding:5px 12px;cursor:pointer;white-space:nowrap;font-family:sans-serif}
+.done-btn:hover{background:#E1F5EE}
+.done-btn.is-done{background:#085041;color:#FAC775;border-color:#085041}
+.done-btn.is-done:hover{background:#04342C}
+
+.type-summary{background:#FAEEDA;border-top:1px solid #EF9F27;padding:7px 10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.ts-cell .tsl{font-size:11px;color:#854F0B;margin-bottom:2px;font-family:sans-serif}
+.ts-cell .tsv{font-weight:700;color:#412402;font-size:13px;font-family:'Amiri',serif}
+.ts-cell .tsv.green{color:#085041}
+.done-tag{font-size:11px;background:#1D9E75;color:#fff;padding:2px 8px;border-radius:20px;font-family:sans-serif}
+
+.cb-summary{background:#FAEEDA;border-top:1px solid #EF9F27;padding:10px 12px;display:flex;flex-direction:column;gap:7px}
+.cs-row{display:flex;justify-content:space-between;font-size:12px;align-items:center;font-family:sans-serif}
+.cs-row .lbl{color:#854F0B}
+.cs-row .val{font-weight:700;color:#412402;font-family:'Amiri',serif;font-size:13px}
+.cs-2col{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cs-box{background:#fff;border:1px solid #EF9F27;border-radius:8px;padding:7px 10px}
+.cs-box .bxlbl{font-size:11px;color:#854F0B;margin-bottom:3px;font-family:sans-serif}
+.cs-box .bxval{font-size:14px;font-weight:700;color:#412402;font-family:'Amiri',serif}
+.cs-box .bxval.green{color:#085041}
+.cs-box .bxsub{font-size:11px;color:#854F0B;margin-top:2px;font-family:sans-serif}
+
+.sh-block{border:1.5px dashed #BA7517;border-radius:10px;padding:9px 11px;display:flex;flex-direction:column;gap:8px;background:#fff}
+.sh-block-label{font-size:11px;font-weight:600;color:#854F0B;font-family:sans-serif;text-transform:uppercase;letter-spacing:.04em}
+.sh-input-row{display:flex;align-items:center;gap:8px}
+.sh-input-row label{font-size:13px;color:#633806;font-family:sans-serif}
+.sh-input-row input{width:56px;background:#FAEEDA;border:1.5px solid #BA7517;border-radius:7px;padding:5px 6px;font-size:16px;font-weight:700;color:#412402;text-align:center;font-family:'Amiri',serif;-moz-appearance:textfield}
+.sh-input-row input::-webkit-inner-spin-button,.sh-input-row input::-webkit-outer-spin-button{-webkit-appearance:none}
+.sh-input-row input:focus{outline:none;border-color:#085041}
+.sh-result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.sh-res-cell{background:#085041;border-radius:8px;padding:7px 9px;display:flex;flex-direction:column;gap:2px}
+.sh-res-cell .srl{font-size:11px;color:rgba(250,199,117,.7);font-family:sans-serif}
+.sh-res-cell .srv{font-size:13px;font-weight:700;color:#FAC775;font-family:'Amiri',serif}
+
+.ornament{text-align:center;color:#BA7517;font-size:13px;letter-spacing:4px;padding:2px 0;opacity:.5}
+.divider{border:none;border-top:1px dashed #EF9F27}
+
+.atbl{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;font-family:sans-serif}
+.atbl th{font-size:11px;font-weight:600;color:#854F0B;padding:6px 8px;border-bottom:1px solid #EF9F27;text-align:left;background:#FAEEDA}
+.atbl td{padding:7px 8px;border-bottom:1px solid rgba(239,159,39,.3);color:#412402}
+.atbl tr:last-child td{border-bottom:none}
+.atbl tr:hover td{background:#FAEEDA}
+.num{text-align:right;font-family:'Amiri',serif;font-weight:700}
+.green{color:#085041}
+
+.badge-gold{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;background:#FAEEDA;color:#633806;border:1px solid #EF9F27;font-family:sans-serif}
+.metrics3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+@media(max-width:480px){.metrics3{grid-template-columns:1fr 1fr}}
+.metric{background:#FAEEDA;border:1px solid #EF9F27;border-radius:10px;padding:10px 12px}
+.metric label{font-size:11px;color:#854F0B;display:block;margin-bottom:3px;font-family:sans-serif}
+.metric .val{font-size:18px;font-weight:700;color:#412402;font-family:'Amiri',serif}
+.metric .unit{font-size:11px;color:#854F0B;font-family:sans-serif}
+
+.footer{text-align:center;font-size:11px;color:#BA7517;padding:10px;font-family:sans-serif;letter-spacing:.04em;opacity:.7}
+
+@media(max-width:500px){
+  .row-hdr,.w-row{grid-template-columns:1fr 1fr 52px 26px}
+  .cs-2col{grid-template-columns:1fr}
+  .area-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr))}
+}
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <h1>☽ Ulluhiyath Calculator</h1>
+  <p>Bakreed Beef Allocation — Mahall Distribution System</p>
+</div>
+
+<div class="app-wrap">
+  <div class="app-header">
+    <div class="header-pattern"></div>
+    <div class="header-icon"><i class="ti ti-moon-stars"></i></div>
+    <div class="header-text">
+      <div class="header-title">Ulluhiyath Calculator</div>
+      <div class="header-sub">Bakreed beef allocation — mahall distribution</div>
+    </div>
+    <div class="header-deco">✦ ☽ ✦</div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab active" onclick="showPage(0)"><i class="ti ti-calculator" style="font-size:13px;vertical-align:-1px;margin-right:5px"></i>Weighing</button>
+    <button class="tab" onclick="showPage(1)"><i class="ti ti-layout-list" style="font-size:13px;vertical-align:-1px;margin-right:5px"></i>Area summary</button>
+  </div>
+
+  <div class="page active" id="page0">
+    <div class="card">
+      <div class="section-head"><i class="ti ti-map-pin"></i>Select area</div>
+      <div class="area-grid" id="area-grid"></div>
+    </div>
+    <div class="card" id="cow-card" style="display:none">
+      <div class="section-head"><i class="ti ti-beef"></i><span id="cow-card-lbl">Select cow</span></div>
+      <div class="cow-grid" id="cow-grid"></div>
+    </div>
+    <div id="cow-calc"></div>
+  </div>
+
+  <div class="page" id="page1">
+    <div class="card">
+      <div class="section-head"><i class="ti ti-chart-bar"></i>Public share (2/3) &amp; shareholder (1/3) — per area</div>
+      <div style="overflow-x:auto">
+        <table class="atbl">
+          <thead><tr>
+            <th style="width:26%">Area</th>
+            <th style="width:8%;text-align:center">Cows</th>
+            <th style="width:13%;text-align:right">Pub. meat</th>
+            <th style="width:13%;text-align:right">Pub. bone</th>
+            <th style="width:12%;text-align:right">Public</th>
+            <th style="width:13%;text-align:right">SH meat</th>
+            <th style="width:13%;text-align:right">SH bone</th>
+            <th style="width:2%;text-align:right">SH</th>
+          </tr></thead>
+          <tbody id="area-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-head"><i class="ti ti-clipboard-list"></i>Grand totals</div>
+      <div class="metrics3" id="grand-metrics"></div>
+    </div>
+    <div class="card" id="all-cows-card"></div>
+  </div>
+
+  <div class="footer">✦ &nbsp; Eid Mubarak &nbsp; ✦ &nbsp; عيد مبارك &nbsp; ✦</div>
+</div>
+
+<script>
+const AREAS=[
+  {name:'ആലുങ്ങപ്പൊറ്റ',code:'A',shares:8},
+  {name:'ചെരിക്കക്കാട്',code:'B',shares:8},
+  {name:'മറ്റത്തൂർ',code:'C',shares:11},
+  {name:'ചക്കും പുറം',code:'D',shares:8},
+  {name:'വട്ടോളി മുക്ക്',code:'E',shares:12},
+  {name:'അൽ അമാൻ മസ്ജിദ്',code:'F',shares:10},
+  {name:'മസ്ജിദുൽ കൗസർ',code:'G',shares:5},
+  {name:'അൽ ഇഹ്സാൻ മസ്ജിദ്',code:'H',shares:2},
+  {name:'CKP',code:'I',shares:4},
+];
+let cows={};
+AREAS.forEach(a=>{cows[a.code]=[];});
+let selArea=null,selCow=null;
+
+function showPage(n){
+  document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n));
+  if(n===1) renderPage2();
+}
+function pf(v){return Math.max(0,parseFloat(v)||0);}
+function rowNet(r){return Math.max(0,pf(r.gross)-(r.hasBucket?pf(r.bucket):0));}
+function typeNet(rows){return (rows||[]).reduce((s,r)=>s+rowNet(r),0);}
+function getCow(){return selCow?cows[selCow.ac][selCow.i]:null;}
+
+function renderAreaGrid(){
+  const g=document.getElementById('area-grid');g.innerHTML='';
+  AREAS.forEach(a=>{
+    const n=cows[a.code].length;
+    const b=document.createElement('button');
+    b.className='area-btn'+(selArea===a.code?' sel':'');
+    b.innerHTML=`<span class="acode">${a.code}</span><span class="aname">${a.name}${n>0?` <span style="color:#1D9E75">(${n})</span>`:''}</span>`;
+    b.onclick=()=>{selArea=a.code;selCow=null;renderAreaGrid();renderCowGrid();renderCowCalc();};
+    g.appendChild(b);
+  });
+}
+
+function renderCowGrid(){
+  const card=document.getElementById('cow-card');
+  const g=document.getElementById('cow-grid');
+  if(!selArea){card.style.display='none';return;}
+  card.style.display='flex';
+  document.getElementById('cow-card-lbl').textContent=`${selArea}: ${AREAS.find(x=>x.code===selArea).name}`;
+  g.innerHTML='';
+  cows[selArea].forEach((cow,i)=>{
+    const isSel=selCow&&selCow.ac===selArea&&selCow.i===i;
+    const allDone=cow.meatDone&&cow.boneDone;
+    const c=document.createElement('button');
+    c.className='cow-chip'+(isSel?' sel':allDone?' done-chip':'');
+    c.textContent=cow.id+(allDone?' ✓':'');
+    c.onclick=()=>{selCow={ac:selArea,i};renderCowGrid();renderCowCalc();};
+    g.appendChild(c);
+  });
+  const add=document.createElement('button');
+  add.className='add-chip';
+  add.innerHTML=`<i class="ti ti-plus" style="font-size:12px"></i> New cow`;
+  add.onclick=()=>{
+    const idx=cows[selArea].length;
+    cows[selArea].push({id:selArea.toLowerCase()+(idx+1),meatRows:[{gross:'',bucket:'',hasBucket:false}],boneRows:[{gross:'',bucket:'',hasBucket:false}],meatDone:false,boneDone:false,shN:''});
+    selCow={ac:selArea,i:idx};
+    renderCowGrid();renderCowCalc();
+  };
+  g.appendChild(add);
+}
+
+function toggleBkt(type,ri,chk){
+  const c=getCow();if(!c)return;
+  const r=(type==='meat'?c.meatRows:c.boneRows)[ri];
+  r.hasBucket=chk;if(!chk)r.bucket='';
+  renderCowCalc();
+}
+function addRow(type){const c=getCow();if(!c)return;(type==='meat'?c.meatRows:c.boneRows).push({gross:'',bucket:'',hasBucket:false});renderCowCalc();}
+function delRow(type,ri){const c=getCow();if(!c)return;const rows=type==='meat'?c.meatRows:c.boneRows;if(rows.length>1){rows.splice(ri,1);renderCowCalc();}}
+function toggleTypeDone(type){const c=getCow();if(!c)return;if(type==='meat')c.meatDone=!c.meatDone;else c.boneDone=!c.boneDone;renderCowGrid();renderCowCalc();}
+
+function recalc(){
+  const cow=getCow();if(!cow)return;
+  const mNet=typeNet(cow.meatRows),bNet=typeNet(cow.boneRows);
+  cow.meatRows.forEach((r,ri)=>{const el=document.getElementById(`net-meat-${ri}`);if(el)el.textContent=rowNet(r).toFixed(2);});
+  cow.boneRows.forEach((r,ri)=>{const el=document.getElementById(`net-bone-${ri}`);if(el)el.textContent=rowNet(r).toFixed(2);});
+  const total=mNet+bNet;
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  set('ts-meat-net',mNet.toFixed(4));set('ts-meat-sh',(mNet/3).toFixed(4));set('ts-meat-pub',(mNet*2/3).toFixed(4));
+  set('ts-bone-net',bNet.toFixed(4));set('ts-bone-sh',(bNet/3).toFixed(4));set('ts-bone-pub',(bNet*2/3).toFixed(4));
+  set('sum-total',total.toFixed(4)+' kg');
+  set('sum-meat-sh',(mNet/3).toFixed(4));set('sum-meat-pub',(mNet*2/3).toFixed(4));
+  set('sum-bone-sh',(bNet/3).toFixed(4));set('sum-bone-pub',(bNet*2/3).toFixed(4));
+  set('sum-1sh-meat',(mNet/3/7).toFixed(4)+' kg');set('sum-1sh-bone',(bNet/3/7).toFixed(4)+' kg');
+  set('cb-head-net',total.toFixed(3)+' kg');
+  const shN=parseInt(cow.shN)||0;
+  const shM=(mNet/3/7)*shN,shB=(bNet/3/7)*shN;
+  const em=document.getElementById('sh-res-meat'),eb=document.getElementById('sh-res-bone'),et=document.getElementById('sh-res-total');
+  if(em)em.textContent=shN>0?shM.toFixed(4)+' kg':'—';
+  if(eb)eb.textContent=shN>0?shB.toFixed(4)+' kg':'—';
+  if(et)et.textContent=shN>0?(shM+shB).toFixed(4)+' kg':'—';
+}
+
+function renderCowCalc(){
+  const wrap=document.getElementById('cow-calc');wrap.innerHTML='';
+  const cow=getCow();if(!cow)return;
+  const mNet=typeNet(cow.meatRows),bNet=typeNet(cow.boneRows),total=mNet+bNet;
+  const mSH=mNet/3,bSH=bNet/3,mPub=mNet*2/3,bPub=bNet*2/3;
+  const om=mSH/7,ob=bSH/7;
+  const shN=parseInt(cow.shN)||0;
+  const shMeat=om*shN,shBone=ob*shN;
+
+  function buildType(type){
+    const rows=type==='meat'?cow.meatRows:cow.boneRows;
+    const net=type==='meat'?mNet:bNet;
+    const sh=net/3,pub=net*2/3;
+    const isDone=type==='meat'?cow.meatDone:cow.boneDone;
+    const dis=isDone?'disabled':'';
+    const label=type==='meat'?'Meat (ഇറച്ചി)':'Bone (എല്ല്)';
+    let rowsHtml='';
+    rows.forEach((r,ri)=>{
+      const rnet=rowNet(r);
+      rowsHtml+=`<div class="w-row">
+        <input type="number" step="0.01" min="0" inputmode="decimal" value="${r.gross}" placeholder="0.00"
+          oninput="getCow().${type==='meat'?'meatRows':'boneRows'}[${ri}].gross=this.value;recalc()" ${dis}>
+        <div class="bkt-wrap">
+          <div class="bkt-row">
+            <input type="checkbox" ${r.hasBucket?'checked':''} onchange="toggleBkt('${type}',${ri},this.checked)" ${dis}>
+            <span>bucket</span>
+          </div>
+          ${r.hasBucket?`<input type="number" step="0.01" min="0" inputmode="decimal" value="${r.bucket}" placeholder="0.00"
+            oninput="getCow().${type==='meat'?'meatRows':'boneRows'}[${ri}].bucket=this.value;recalc()" ${dis}>`:''}
+        </div>
+        <div class="net-cell" id="net-${type}-${ri}">${rnet.toFixed(2)}</div>
+        <button class="delbtn" onclick="delRow('${type}',${ri})"${rows.length===1||isDone?' disabled':''}><i class="ti ti-x"></i></button>
+      </div>`;
+    });
+    return `<div class="type-block${isDone?' type-done':''}">
+      <div class="type-head">
+        <span class="type-lbl">${label}${isDone?` <span class="done-tag"><i class="ti ti-check" style="font-size:10px"></i> done</span>`:''}</span>
+      </div>
+      <div class="type-body">
+        <div class="row-hdr"><div>Gross kg</div><div>Bucket kg</div><div>Net</div><div></div></div>
+        ${rowsHtml}
+        <div class="row-actions">
+          <button class="addbtn" onclick="addRow('${type}')" ${isDone?'disabled':''}><i class="ti ti-plus"></i> Add weighing</button>
+          <button class="done-btn${isDone?' is-done':''}" onclick="toggleTypeDone('${type}')">
+            ${isDone?`<i class="ti ti-lock-open"></i> Edit`:`<i class="ti ti-check"></i> Done`}
+          </button>
+        </div>
+      </div>
+      <div class="type-summary">
+        <div class="ts-cell"><div class="tsl">Total net</div><div class="tsv" id="ts-${type}-net">${net.toFixed(4)}</div></div>
+        <div class="ts-cell"><div class="tsl">SH (1/3)</div><div class="tsv green" id="ts-${type}-sh">${sh.toFixed(4)}</div></div>
+        <div class="ts-cell"><div class="tsl">Public (2/3)</div><div class="tsv" id="ts-${type}-pub">${pub.toFixed(4)}</div></div>
+      </div>
+    </div>`;
+  }
+
+  const div=document.createElement('div');
+  div.className='cow-block';
+  div.innerHTML=`
+    <div class="cb-head">
+      <div class="cname">${cow.id} <span>total: <span id="cb-head-net">${total.toFixed(3)} kg</span></span></div>
+    </div>
+    <div class="cb-body">
+      ${buildType('meat')}
+      ${buildType('bone')}
+    </div>
+    <div class="cb-summary">
+      <div class="ornament">✦ ✦ ✦</div>
+      <div class="cs-row"><span class="lbl">Total net (meat + bone)</span><span class="val" id="sum-total">${total.toFixed(4)} kg</span></div>
+      <div class="cs-2col">
+        <div class="cs-box">
+          <div class="bxlbl">Meat — SH (1/3)</div>
+          <div class="bxval green" id="sum-meat-sh">${mSH.toFixed(4)}</div>
+          <div class="bxsub">Public (2/3): <span id="sum-meat-pub">${mPub.toFixed(4)}</span> kg</div>
+        </div>
+        <div class="cs-box">
+          <div class="bxlbl">Bone — SH (1/3)</div>
+          <div class="bxval green" id="sum-bone-sh">${bSH.toFixed(4)}</div>
+          <div class="bxsub">Public (2/3): <span id="sum-bone-pub">${bPub.toFixed(4)}</span> kg</div>
+        </div>
+      </div>
+      <div class="cs-2col">
+        <div class="cs-box">
+          <div class="bxlbl">1 share of meat (÷7)</div>
+          <div class="bxval" id="sum-1sh-meat">${om.toFixed(4)} kg</div>
+        </div>
+        <div class="cs-box">
+          <div class="bxlbl">1 share of bone (÷7)</div>
+          <div class="bxval" id="sum-1sh-bone">${ob.toFixed(4)} kg</div>
+        </div>
+      </div>
+      <div class="sh-block">
+        <div class="sh-block-label"><i class="ti ti-users" style="font-size:12px;vertical-align:-1px;margin-right:4px"></i>Shareholder portion</div>
+        <div class="sh-input-row">
+          <label>Shares (out of 7):</label>
+          <input type="number" min="0" max="7" step="1" value="${cow.shN}" placeholder="0–7"
+            oninput="getCow().shN=this.value;recalc()">
+        </div>
+        <div class="sh-result-grid">
+          <div class="sh-res-cell"><div class="srl">Meat</div><div class="srv" id="sh-res-meat">${shN>0?shMeat.toFixed(4)+' kg':'—'}</div></div>
+          <div class="sh-res-cell"><div class="srl">Bone</div><div class="srv" id="sh-res-bone">${shN>0?shBone.toFixed(4)+' kg':'—'}</div></div>
+          <div class="sh-res-cell"><div class="srl">Total</div><div class="srv" id="sh-res-total" style="color:#FAC775">${shN>0?(shMeat+shBone).toFixed(4)+' kg':'—'}</div></div>
+        </div>
+      </div>
+    </div>`;
+  wrap.appendChild(div);
+}
+
+function renderPage2(){
+  const tbody=document.getElementById('area-tbody');tbody.innerHTML='';
+  let gMeat=0,gBone=0,gPubM=0,gPubB=0,gSHM=0,gSHB=0;
+  const allRows=[];
+  AREAS.forEach(a=>{
+    let aMeat=0,aBone=0;
+    cows[a.code].forEach(cow=>{
+      const m=typeNet(cow.meatRows||[]),b=typeNet(cow.boneRows||[]);
+      aMeat+=m;aBone+=b;
+      allRows.push({id:cow.id,area:a.code,m,b});
+    });
+    gMeat+=aMeat;gBone+=aBone;gPubM+=aMeat*2/3;gPubB+=aBone*2/3;gSHM+=aMeat/3;gSHB+=aBone/3;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><strong>${a.code}</strong> <span style="font-size:11px;color:#854F0B">${a.name}</span></td>
+      <td style="text-align:center"><span class="badge-gold">${cows[a.code].length}</span></td>
+      <td class="num">${(aMeat*2/3).toFixed(3)}</td>
+      <td class="num">${(aBone*2/3).toFixed(3)}</td>
+      <td class="num" style="font-weight:700">${((aMeat+aBone)*2/3).toFixed(3)}</td>
+      <td class="num green">${(aMeat/3).toFixed(3)}</td>
+      <td class="num green">${(aBone/3).toFixed(3)}</td>
+      <td class="num green" style="font-weight:700">${((aMeat+aBone)/3).toFixed(3)}</td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('grand-metrics').innerHTML=`
+    <div class="metric"><label>Total meat net</label><span class="val">${gMeat.toFixed(2)}</span> <span class="unit">kg</span></div>
+    <div class="metric"><label>Total bone net</label><span class="val">${gBone.toFixed(2)}</span> <span class="unit">kg</span></div>
+    <div class="metric"><label>Grand total</label><span class="val">${(gMeat+gBone).toFixed(2)}</span> <span class="unit">kg</span></div>
+    <div class="metric"><label>Public meat (2/3)</label><span class="val">${gPubM.toFixed(2)}</span> <span class="unit">kg</span></div>
+    <div class="metric"><label>Public bone (2/3)</label><span class="val">${gPubB.toFixed(2)}</span> <span class="unit">kg</span></div>
+    <div class="metric"><label>Total public</label><span class="val">${(gPubM+gPubB).toFixed(2)}</span> <span class="unit">kg</span></div>`;
+  const allCard=document.getElementById('all-cows-card');
+  if(!allRows.length){allCard.innerHTML=`<div style="font-size:13px;color:#854F0B;padding:4px">No cows entered yet.</div>`;return;}
+  allCard.innerHTML=`<div class="section-head" style="margin-bottom:8px"><i class="ti ti-list"></i>All cows</div>
+    <div style="overflow-x:auto"><table class="atbl"><thead><tr>
+      <th>Cow</th><th>Area</th>
+      <th style="text-align:right">Meat</th><th style="text-align:right">Bone</th>
+      <th style="text-align:right">Pub. meat</th><th style="text-align:right">Pub. bone</th>
+      <th style="text-align:right">SH meat</th><th style="text-align:right">SH bone</th>
+    </tr></thead><tbody>
+    ${allRows.map(c=>`<tr>
+      <td style="font-weight:700;color:#085041">${c.id}</td><td>${c.area}</td>
+      <td class="num">${c.m.toFixed(3)}</td><td class="num">${c.b.toFixed(3)}</td>
+      <td class="num">${(c.m*2/3).toFixed(3)}</td><td class="num">${(c.b*2/3).toFixed(3)}</td>
+      <td class="num green">${(c.m/3).toFixed(3)}</td><td class="num green">${(c.b/3).toFixed(3)}</td>
+    </tr>`).join('')}
+    </tbody></table></div>`;
+}
+
+renderAreaGrid();
+</script>
+</body>
+</html>
