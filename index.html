@@ -13,6 +13,7 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
 .page-title{text-align:center;margin-bottom:16px}
 .page-title h1{font-size:26px;font-weight:700;color:#085041;letter-spacing:.02em}
 .page-title p{font-size:13px;color:#854F0B;font-family:sans-serif;margin-top:4px;letter-spacing:.04em}
+.page-title .sponsor{font-size:12px;color:#085041;font-family:sans-serif;margin-top:3px;font-weight:600}
 .app-wrap{background:#FAFAF7;border:1.5px solid #EF9F27;border-radius:16px;overflow:hidden;width:100%;max-width:780px}
 .app-header{background:#085041;padding:14px 20px 10px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden}
 .header-pattern{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 0,transparent 50%),repeating-linear-gradient(-45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 0,transparent 50%);background-size:20px 20px;pointer-events:none}
@@ -64,8 +65,8 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
 .type-lbl{font-size:12px;font-weight:600;color:#633806;font-family:sans-serif}
 .type-block.type-done .type-lbl{color:#085041}
 .type-body{padding:8px 10px;display:flex;flex-direction:column;gap:6px;background:#fff}
-.row-hdr{display:grid;grid-template-columns:1fr 1fr 60px 26px;gap:5px;font-size:11px;color:#854F0B;font-weight:600;padding:0 2px;font-family:sans-serif}
-.w-row{display:grid;grid-template-columns:1fr 1fr 60px 26px;gap:5px;align-items:center;margin-bottom:4px}
+.row-hdr{display:grid;grid-template-columns:1fr 1fr 64px 26px;gap:5px;font-size:11px;color:#854F0B;font-weight:600;padding:0 2px;font-family:sans-serif}
+.w-row{display:grid;grid-template-columns:1fr 1fr 64px 26px;gap:5px;align-items:center;margin-bottom:4px}
 .w-row input[type=number]{width:100%;background:#FAFAF7;border:1px solid #EF9F27;border-radius:7px;padding:7px 6px;font-size:16px;font-family:'Amiri',serif;color:#412402;text-align:center;-moz-appearance:textfield}
 .w-row input[type=number]::-webkit-inner-spin-button,.w-row input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
 .w-row input[type=number]:focus{outline:none;border-color:#085041;box-shadow:0 0 0 2px rgba(8,80,65,.12)}
@@ -90,6 +91,13 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
 .ts-cell .tsv{font-weight:700;color:#412402;font-size:13px;font-family:'Amiri',serif}
 .ts-cell .tsv.green{color:#085041}
 .done-tag{font-size:11px;background:#1D9E75;color:#fff;padding:2px 8px;border-radius:20px;font-family:sans-serif}
+.fakkeer-bar{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1.5px solid #BA7517}
+.fk-cell{padding:7px 10px;background:#FAEEDA}
+.fk-cell.fk-balance{background:#085041}
+.fkl{font-size:11px;color:#854F0B;margin-bottom:2px;font-family:sans-serif}
+.fk-cell.fk-balance .fkl{color:rgba(250,199,117,.7)}
+.fkv{font-size:15px;font-weight:700;color:#633806;font-family:'Amiri',serif}
+.fk-cell.fk-balance .fkv{color:#FAC775;font-size:16px}
 .cb-summary{background:#FAEEDA;border-top:1px solid #EF9F27;padding:10px 12px;display:flex;flex-direction:column;gap:7px}
 .cs-row{display:flex;justify-content:space-between;font-size:12px;align-items:center;font-family:sans-serif}
 .cs-row .lbl{color:#854F0B}
@@ -127,42 +135,12 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
 .metric .val{font-size:18px;font-weight:700;color:#412402;font-family:'Amiri',serif}
 .metric .unit{font-size:11px;color:#854F0B;font-family:sans-serif}
 .footer{text-align:center;font-size:11px;color:#BA7517;padding:10px;font-family:sans-serif;letter-spacing:.04em;opacity:.7}
-.pdf-btn{display:flex;align-items:center;gap:6px;font-size:13px;background:#085041;color:#FAC775;border:none;border-radius:8px;padding:8px 16px;cursor:pointer;font-family:sans-serif;font-weight:600;margin-left:auto}
-.pdf-btn:hover{background:#04342C}
-.pdf-btn i{font-size:15px}
-
-@media print{
-  body{background:#fff;padding:0;display:block}
-  .app-header,.tab-bar,.sync-bar,.page-title,.footer{display:none!important}
-  .app-wrap{border:none;border-radius:0;max-width:100%;width:100%}
-  #page0{display:none!important}
-  #page1{display:flex!important;padding:0}
-  .pdf-btn{display:none!important}
-  .print-header{display:block!important}
-  .card{border:1px solid #ccc;border-radius:0;break-inside:avoid}
-  .metric{border:1px solid #ccc}
-  .atbl th{background:#085041!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .atbl tr:nth-child(even) td{background:#f9f6f0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .num{font-family:'Amiri',serif}
-}
-.print-header{display:none;text-align:center;padding:16px 0 10px;border-bottom:2px solid #085041;margin-bottom:12px}
-.print-header h2{font-size:22px;font-weight:700;color:#085041;font-family:'Amiri',serif}
-.print-header p{font-size:12px;color:#854F0B;font-family:sans-serif;margin-top:3px}
-.print-header .sponsor{font-size:13px;font-weight:600;color:#633806;font-family:sans-serif;margin-top:4px}
-.print-header .print-date{font-size:11px;color:#888;font-family:sans-serif;margin-top:2px}
-.fakkeer-bar{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1.5px solid #BA7517}
-.fk-cell{padding:7px 10px;background:#FAEEDA}
-.fk-cell.fk-balance{background:#085041}
-.fkl{font-size:11px;color:#854F0B;margin-bottom:2px;font-family:sans-serif}
-.fk-cell.fk-balance .fkl{color:rgba(250,199,117,.7)}
-.fkv{font-size:15px;font-weight:700;color:#633806;font-family:'Amiri',serif}
-.fk-cell.fk-balance .fkv{color:#FAC775;font-size:16px}
 .loading-overlay{position:fixed;inset:0;background:rgba(248,240,225,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;gap:14px}
 .loading-overlay.hidden{display:none}
 .loading-spinner{width:40px;height:40px;border:3px solid #FAEEDA;border-top-color:#085041;border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-text{font-size:15px;color:#085041;font-family:sans-serif}
-@media(max-width:500px){.row-hdr,.w-row{grid-template-columns:1fr 1fr 52px 26px}.cs-2col{grid-template-columns:1fr}.area-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr))}}
+@media(max-width:500px){.cs-2col{grid-template-columns:1fr}.area-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr))}}
 </style>
 </head>
 <body>
@@ -175,7 +153,7 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
 <div class="page-title">
   <h1>☽ Mongam Mahallu Ulluhiyath Calculator</h1>
   <p>Bakreed Buffalo Allocation — Mahall Distribution System</p>
-  <p style="font-size:12px;color:#085041;font-family:sans-serif;margin-top:3px;font-weight:600;letter-spacing:.03em">Sponsored by SKSSF Mongam Unit</p>
+  <p class="sponsor">Sponsored by SKSSF Mongam Unit</p>
 </div>
 
 <div class="app-wrap">
@@ -215,14 +193,8 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
   </div>
 
   <div class="page" id="page1">
-    <div class="print-header">
-      <h2>☽ Mongam Mahallu Ulluhiyath Calculator</h2>
-      <p>Bakreed Buffalo Allocation — Mahall Distribution System</p>
-      <div class="sponsor">Sponsored by SKSSF Mongam Unit</div>
-      <div class="print-date" id="print-date"></div>
-    </div>
     <div class="card">
-      <div class="section-head"><i class="ti ti-chart-bar"></i>Public share (2/3) &amp; shareholder (1/3) — per area</div>
+      <div class="section-head"><i class="ti ti-chart-bar"></i>Area-wise distribution</div>
       <div style="overflow-x:auto">
         <table class="atbl">
           <thead><tr>
@@ -247,9 +219,9 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
 </div>
 
 <script>
-const SUPABASE_URL = 'https://rocqprfxagapjucpdydx.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvY3FwcmZ4YWdhcGp1Y3BkeWR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4NzUxMzQsImV4cCI6MjA5NTQ1MTEzNH0.FWGP76co_I57Q6JeN6zvdlfp7oI3b4mK5n3AOkzJR-g';
-const TABLE = 'cowdata';
+const SUPABASE_URL='https://rocqprfxagapjucpdydx.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvY3FwcmZ4YWdhcGp1Y3BkeWR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4NzUxMzQsImV4cCI6MjA5NTQ1MTEzNH0.FWGP76co_I57Q6JeN6zvdlfp7oI3b4mK5n3AOkzJR-g';
+const TABLE='cowdata';
 
 const AREAS=[
   {name:'ആലുങ്ങപ്പൊറ്റ',code:'A',shares:8},
@@ -265,31 +237,20 @@ const AREAS=[
 
 let cows={};
 AREAS.forEach(a=>{cows[a.code]=[];});
-let selArea=null,selCow=null;
-let saveTimer=null;
+let selArea=null,selCow=null,saveTimer=null;
 
 function setSyncStatus(state,msg){
-  const dot=document.getElementById('sync-dot');
-  const lbl=document.getElementById('sync-label');
-  dot.className='sync-dot '+state;
-  lbl.textContent=msg;
+  document.getElementById('sync-dot').className='sync-dot '+state;
+  document.getElementById('sync-label').textContent=msg;
 }
 
 async function apiCall(method,path,body){
   const res=await fetch(SUPABASE_URL+'/rest/v1/'+path,{
     method,
-    headers:{
-      'apikey':SUPABASE_KEY,
-      'Authorization':'Bearer '+SUPABASE_KEY,
-      'Content-Type':'application/json',
-      'Prefer': method==='POST'?'resolution=merge-duplicates,return=minimal':'return=minimal'
-    },
+    headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':method==='POST'?'resolution=merge-duplicates,return=minimal':'return=minimal'},
     body:body?JSON.stringify(body):undefined
   });
-  if(method==='GET'){
-    const data=await res.json();
-    return data;
-  }
+  if(method==='GET') return await res.json();
   return res.ok;
 }
 
@@ -299,53 +260,37 @@ async function loadFromSupabase(){
     const rows=await apiCall('GET',TABLE+'?select=*&order=cow_index');
     if(Array.isArray(rows)){
       AREAS.forEach(a=>{cows[a.code]=[];});
-      rows.forEach(row=>{
-        if(cows[row.area_code]!==undefined){
-          cows[row.area_code][row.cow_index]=row.cow_data;
-        }
-      });
+      rows.forEach(row=>{if(cows[row.area_code]!==undefined) cows[row.area_code][row.cow_index]=row.cow_data;});
       setSyncStatus('online','Auto-sync on • Last: '+new Date().toLocaleTimeString());
     }
   }catch(e){
     setSyncStatus('error','Connection error — tap Refresh');
-    console.error(e);
   }
   document.getElementById('loading-overlay').classList.add('hidden');
-  renderAreaGrid();
-  renderCowGrid();
-  renderCowCalc();
+  renderAreaGrid();renderCowGrid();renderCowCalc();
 }
 
-async function saveCow(areaCode,cowIndex){
+async function saveCow(ac,ci){
   setSyncStatus('saving','Saving...');
-  const cow=cows[areaCode][cowIndex];
   try{
-    await apiCall('POST',TABLE,{
-      id: areaCode+'_'+cowIndex,
-      area_code: areaCode,
-      cow_index: cowIndex,
-      cow_data: cow
-    });
-    setSyncStatus('online','Saved — '+new Date().toLocaleTimeString());
-  }catch(e){
-    setSyncStatus('error','Save failed');
-  }
+    await apiCall('POST',TABLE,{id:ac+'_'+ci,area_code:ac,cow_index:ci,cow_data:cows[ac][ci]});
+    setSyncStatus('online','Saved • '+new Date().toLocaleTimeString());
+  }catch(e){setSyncStatus('error','Save failed');}
 }
 
 function scheduleSave(){
-  if(!selCow) return;
+  if(!selCow)return;
   clearTimeout(saveTimer);
   setSyncStatus('saving','Saving...');
-  saveTimer=setTimeout(()=>{
-    saveCow(selCow.ac,selCow.i);
-  },1200);
+  saveTimer=setTimeout(()=>{saveCow(selCow.ac,selCow.i);},1200);
 }
 
 function showPage(n){
   document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('active',i===n));
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n));
-  if(n===1) renderPage2();
+  if(n===1)renderPage2();
 }
+
 function pf(v){return Math.max(0,parseFloat(v)||0);}
 function rowNet(r){return Math.max(0,pf(r.gross)-(r.hasBucket?pf(r.bucket):0));}
 function typeNet(rows){return (rows||[]).reduce((s,r)=>s+rowNet(r),0);}
@@ -357,7 +302,7 @@ function renderAreaGrid(){
     const n=cows[a.code].length;
     const b=document.createElement('button');
     b.className='area-btn'+(selArea===a.code?' sel':'');
-    b.innerHTML=`<span class="acode">${a.code}</span><span class="aname">${a.name}${n>0?` <span style="color:#1D9E75">(${n} buffalo${n>1?'es':''})</span>`:''}</span>`;
+    b.innerHTML=`<span class="acode">${a.code}</span><span class="aname">${a.name}${n>0?` <span style="color:#1D9E75">(${n})</span>`:''}</span>`;
     b.onclick=()=>{selArea=a.code;selCow=null;renderAreaGrid();renderCowGrid();renderCowCalc();};
     g.appendChild(b);
   });
@@ -371,7 +316,7 @@ function renderCowGrid(){
   document.getElementById('cow-card-lbl').textContent=`Buffaloes — ${selArea}: ${AREAS.find(x=>x.code===selArea).name}`;
   g.innerHTML='';
   cows[selArea].forEach((cow,i)=>{
-    if(!cow) return;
+    if(!cow)return;
     const isSel=selCow&&selCow.ac===selArea&&selCow.i===i;
     const allDone=cow.meatDone&&cow.boneDone;
     const c=document.createElement('button');
@@ -385,8 +330,8 @@ function renderCowGrid(){
   add.innerHTML=`<i class="ti ti-plus" style="font-size:12px"></i> New buffalo`;
   add.onclick=async()=>{
     const idx=cows[selArea].length;
-    const newCow={id:selArea.toLowerCase()+(idx+1),meatRows:[{gross:'',bucket:'',hasBucket:false}],boneRows:[{gross:'',bucket:'',hasBucket:false}],meatDone:false,boneDone:false,shN:''};
-    cows[selArea].push(newCow);
+    const nb={id:selArea.toLowerCase()+(idx+1),meatRows:[{gross:'',bucket:'',hasBucket:false}],boneRows:[{gross:'',bucket:'',hasBucket:false}],meatDone:false,boneDone:false,shN:'',hasFakkeer:false};
+    cows[selArea].push(nb);
     selCow={ac:selArea,i:idx};
     await saveCow(selArea,idx);
     renderCowGrid();renderCowCalc();
@@ -410,23 +355,28 @@ function recalc(){
   const mNet=typeNet(cow.meatRows),bNet=typeNet(cow.boneRows);
   cow.meatRows.forEach((r,ri)=>{const el=document.getElementById(`net-meat-${ri}`);if(el)el.textContent=rowNet(r).toFixed(2);});
   cow.boneRows.forEach((r,ri)=>{const el=document.getElementById(`net-bone-${ri}`);if(el)el.textContent=rowNet(r).toFixed(2);});
-  const total=mNet+bNet;
-  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  set('ts-meat-net',mNet.toFixed(4));set('ts-meat-sh',(mNet/3).toFixed(4));set('ts-meat-pub',(mNet*2/3).toFixed(4));
-  set('ts-bone-net',bNet.toFixed(4));set('ts-bone-sh',(bNet/3).toFixed(4));set('ts-bone-pub',(bNet*2/3).toFixed(4));
-  set('sum-total',total.toFixed(4)+' kg');
-  set('sum-meat-sh',(balMeat/3).toFixed(4));set('sum-meat-pub',(balMeat*2/3).toFixed(4));
-  set('sum-bone-sh',(bNet/3).toFixed(4));set('sum-bone-pub',(bNet*2/3).toFixed(4));
-  set('sum-1sh-meat',(balMeat/3/7).toFixed(4)+' kg');set('sum-1sh-bone',(bNet/3/7).toFixed(4)+' kg');
-  set('cb-head-net',total.toFixed(3)+' kg');
-  const cow2=getCow();
-  const hasFk=cow2&&cow2.hasFakkeer;
+  const hasFk=cow.hasFakkeer||false;
   const balMeat=hasFk?Math.max(0,mNet-3.5):mNet;
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  set('ts-meat-net',mNet.toFixed(4));
+  set('ts-meat-sh',(balMeat/3).toFixed(4));
+  set('ts-meat-pub',(balMeat*2/3).toFixed(4));
+  set('ts-bone-net',bNet.toFixed(4));
+  set('ts-bone-sh',(bNet/3).toFixed(4));
+  set('ts-bone-pub',(bNet*2/3).toFixed(4));
   set('ts-meat-balance',balMeat.toFixed(4));
-  set('ts-meat-sh2',(balMeat/3).toFixed(4));
   set('ts-meat-pub2',(balMeat*2/3).toFixed(4));
+  const total=balMeat+bNet;
+  set('sum-total',total.toFixed(4)+' kg');
+  set('sum-meat-sh',(balMeat/3).toFixed(4));
+  set('sum-meat-pub',(balMeat*2/3).toFixed(4));
+  set('sum-bone-sh',(bNet/3).toFixed(4));
+  set('sum-bone-pub',(bNet*2/3).toFixed(4));
+  set('sum-1sh-meat',(balMeat/3/7).toFixed(4)+' kg');
+  set('sum-1sh-bone',(bNet/3/7).toFixed(4)+' kg');
+  set('cb-head-net',total.toFixed(3)+' kg');
   const shN=parseInt(cow.shN)||0;
-  const shM=(mNet/3/7)*shN,shB=(bNet/3/7)*shN;
+  const shM=(balMeat/3/7)*shN,shB=(bNet/3/7)*shN;
   const em=document.getElementById('sh-res-meat'),eb=document.getElementById('sh-res-bone'),et=document.getElementById('sh-res-total');
   if(em)em.textContent=shN>0?shM.toFixed(4)+' kg':'—';
   if(eb)eb.textContent=shN>0?shB.toFixed(4)+' kg':'—';
@@ -437,10 +387,10 @@ function recalc(){
 function renderCowCalc(){
   const wrap=document.getElementById('cow-calc');wrap.innerHTML='';
   const cow=getCow();if(!cow)return;
-  const mNet=typeNet(cow.meatRows),bNet=typeNet(cow.boneRows),total=mNet+bNet;
+  const mNet=typeNet(cow.meatRows),bNet=typeNet(cow.boneRows);
   const hasFakkeer=cow.hasFakkeer||false;
-  const balMeatCalc=hasFakkeer?Math.max(0,mNet-3.5):mNet;
-  const mSH=balMeatCalc/3,bSH=bNet/3,mPub=balMeatCalc*2/3,bPub=bNet*2/3;
+  const balMeat=hasFakkeer?Math.max(0,mNet-3.5):mNet;
+  const mSH=balMeat/3,bSH=bNet/3,mPub=balMeat*2/3,bPub=bNet*2/3;
   const om=mSH/7,ob=bSH/7;
   const shN=parseInt(cow.shN)||0;
   const shMeat=om*shN,shBone=ob*shN;
@@ -448,7 +398,8 @@ function renderCowCalc(){
   function buildType(type){
     const rows=type==='meat'?cow.meatRows:cow.boneRows;
     const net=type==='meat'?mNet:bNet;
-    const sh=net/3,pub=net*2/3;
+    const sh=type==='meat'?mSH:bSH;
+    const pub=type==='meat'?mPub:bPub;
     const isDone=type==='meat'?cow.meatDone:cow.boneDone;
     const dis=isDone?'disabled':'';
     const label=type==='meat'?'Meat (ഇറച്ചി)':'Bone (എല്ല്)';
@@ -463,13 +414,11 @@ function renderCowCalc(){
             <input type="checkbox" ${r.hasBucket?'checked':''} onchange="toggleBkt('${type}',${ri},this.checked)" ${dis}>
             <span>bucket</span>
           </div>
-          ${r.hasBucket?`<input type="number" step="0.01" min="0" inputmode="decimal" value="${r.bucket}" placeholder="0.00"
-            oninput="getCow().${type==='meat'?'meatRows':'boneRows'}[${ri}].bucket=this.value;recalc()" ${dis}>`:''}
+          ${r.hasBucket?`<input type="number" step="0.01" min="0" inputmode="decimal" value="${r.bucket}" placeholder="0.00" oninput="getCow().${type==='meat'?'meatRows':'boneRows'}[${ri}].bucket=this.value;recalc()" ${dis}>`:''}
         </div>
         <div class="net-cell" id="net-${type}-${ri}">${rnet.toFixed(2)}</div>
         <button class="delbtn" onclick="delRow('${type}',${ri})"${rows.length===1||isDone?' disabled':''}><i class="ti ti-x"></i></button>
-      </div>`
-      <textarea rows="2" placeholder="Remark..." style="width:100%;margin-bottom:6px;background:#fffdf7;border:1px solid #EF9F27;border-radius:6px;padding:7px 9px;font-size:13px;font-family:sans-serif;color:#412402;resize:none;line-height:1.5;display:block" onfocus="this.style.borderColor='#085041'" onblur="this.style.borderColor='#EF9F27'" oninput="var c=getCow();if(c){var arr='${type}'==='meat'?c.meatRows:c.boneRows;if(arr[${ri}])arr[${ri}].remark=this.value;scheduleSave();}">${r.remark||''}</textarea>;
+      </div>`;
     });
     return `<div class="type-block${isDone?' type-done':''}">
       <div class="type-head">
@@ -487,30 +436,32 @@ function renderCowCalc(){
       </div>
       <div class="type-summary">
         <div class="ts-cell"><div class="tsl">Total net</div><div class="tsv" id="ts-${type}-net">${net.toFixed(4)}</div></div>
-        <div class="ts-cell"><div class="tsl">SH (1/3)</div><div class="tsv green" id="ts-${type}-sh">${type==='meat'?(hasFakkeer?(Math.max(0,net-3.5)/3):(net/3)).toFixed(4):sh.toFixed(4)}</div></div>
-        <div class="ts-cell"><div class="tsl">Public (2/3)</div><div class="tsv" id="ts-${type}-pub">${type==='meat'?(hasFakkeer?(Math.max(0,net-3.5)*2/3):(net*2/3)).toFixed(4):pub.toFixed(4)}</div></div>
+        <div class="ts-cell"><div class="tsl">SH (1/3)</div><div class="tsv green" id="ts-${type}-sh">${sh.toFixed(4)}</div></div>
+        <div class="ts-cell"><div class="tsl">Public (2/3)</div><div class="tsv" id="ts-${type}-pub">${pub.toFixed(4)}</div></div>
       </div>
       ${type==='meat'?`<div class="fakkeer-bar">
-        <div class="fk-cell"><div class="fkl">മൊത്തം ഇറച്ചി</div><div class="fkv">${net.toFixed(4)} kg</div></div>
-        <div class="fk-cell" style="background:#FFF3E0">
-          <div class="fkl" style="color:#633806;display:flex;align-items:center;gap:5px">
-            <input type="checkbox" id="fakkeer-chk" ${cow.hasFakkeer?'checked':''} onchange="toggleFakkeer(this.checked)" style="width:14px;height:14px;cursor:pointer;accent-color:#085041">
-            ( − ) ഫക്കീർ (3.5 kg)
+        <div class="fk-cell">
+          <div class="fkl" style="display:flex;align-items:center;gap:6px">
+            <input type="checkbox" ${hasFakkeer?'checked':''} onchange="toggleFakkeer(this.checked)" style="width:14px;height:14px;cursor:pointer;accent-color:#085041">
+            ഫക്കീർ (3.5 kg)
           </div>
-          <div class="fkv" style="color:#A35000">${cow.hasFakkeer?'3.5000 kg':'—'}</div>
+          <div class="fkv" style="color:#A35000">${hasFakkeer?'3.5000 kg':'—'}</div>
         </div>
-        <div class="fk-cell fk-balance"><div class="fkl">ബാലൻസ് ഇറച്ചി</div><div class="fkv" id="ts-meat-balance">${cow.hasFakkeer?Math.max(0,net-3.5).toFixed(4):net.toFixed(4)} kg</div></div>
-        <div class="fk-cell" style="background:#E1F5EE"><div class="fkl" style="color:#085041">SH 1/3 (ബാലൻസിൽ നിന്ന്)</div><div class="fkv" style="color:#085041" id="ts-meat-sh2">${cow.hasFakkeer?(Math.max(0,net-3.5)/3).toFixed(4):(net/3).toFixed(4)} kg</div></div>
-        <div class="fk-cell" style="background:#E1F5EE"><div class="fkl" style="color:#085041">Public 2/3 (ബാലൻസിൽ നിന്ന്)</div><div class="fkv" style="color:#085041" id="ts-meat-pub2">${cow.hasFakkeer?(Math.max(0,net-3.5)*2/3).toFixed(4):(net*2/3).toFixed(4)} kg</div></div>
+        <div class="fk-cell fk-balance">
+          <div class="fkl">ബാലൻസ് ഇറച്ചി</div>
+          <div class="fkv" id="ts-meat-balance">${balMeat.toFixed(4)} kg</div>
+        </div>
       </div>`:''}
     </div>`;
   }
+
+  const shLine=shN>0?`${shN} × ${om.toFixed(4)} = <b>${shMeat.toFixed(4)} kg</b>`:`<span style="color:#854F0B">enter shares</span>`;
 
   const div=document.createElement('div');
   div.className='cow-block';
   div.innerHTML=`
     <div class="cb-head">
-      <div class="cname">${cow.id} <span>total: <span id="cb-head-net">${total.toFixed(3)} kg</span></span></div>
+      <div class="cname">${cow.id} <span>total: <span id="cb-head-net">${(balMeat+bNet).toFixed(3)} kg</span></span></div>
     </div>
     <div class="cb-body">
       ${buildType('meat')}
@@ -518,10 +469,10 @@ function renderCowCalc(){
     </div>
     <div class="cb-summary">
       <div class="ornament">✦ ✦ ✦</div>
-      <div class="cs-row"><span class="lbl">Total net (meat + bone)</span><span class="val" id="sum-total">${total.toFixed(4)} kg</span></div>
+      <div class="cs-row"><span class="lbl">Total net (meat + bone)</span><span class="val" id="sum-total">${(balMeat+bNet).toFixed(4)} kg</span></div>
       <div class="cs-2col">
-        <div class="cs-box"><div class="bxlbl">Meat SH 1/3 (ഫക്കീർ കഴിഞ്ഞ്)</div><div class="bxval green" id="sum-meat-sh">${(cow.hasFakkeer?(Math.max(0,mNet-3.5)/3):(mNet/3)).toFixed(4)}</div><div class="bxsub">Public (2/3): <span id="sum-meat-pub">${(cow.hasFakkeer?(Math.max(0,mNet-3.5)*2/3):(mNet*2/3)).toFixed(4)}</span> kg</div></div>
-        <div class="cs-box"><div class="bxlbl">Bone — SH (1/3)</div><div class="bxval green" id="sum-bone-sh">${bSH.toFixed(4)}</div><div class="bxsub">Public (2/3): <span id="sum-bone-pub">${bPub.toFixed(4)}</span> kg</div></div>
+        <div class="cs-box"><div class="bxlbl">Meat SH 1/3</div><div class="bxval green" id="sum-meat-sh">${mSH.toFixed(4)}</div><div class="bxsub">Public (2/3): <span id="sum-meat-pub">${mPub.toFixed(4)}</span> kg</div></div>
+        <div class="cs-box"><div class="bxlbl">Bone SH 1/3</div><div class="bxval green" id="sum-bone-sh">${bSH.toFixed(4)}</div><div class="bxsub">Public (2/3): <span id="sum-bone-pub">${bPub.toFixed(4)}</span> kg</div></div>
       </div>
       <div class="cs-2col">
         <div class="cs-box"><div class="bxlbl">1 share of meat (÷7)</div><div class="bxval" id="sum-1sh-meat">${om.toFixed(4)} kg</div></div>
@@ -545,58 +496,52 @@ function renderCowCalc(){
 
 function renderPage2(){
   const tbody=document.getElementById('area-tbody');tbody.innerHTML='';
-  let gMeat=0,gBone=0,gPubM=0,gPubB=0;
+  let gMeat=0,gBone=0,gFk=0;
   const allRows=[];
   AREAS.forEach(a=>{
-    let aMeat=0,aBone=0;
+    let aMeatRaw=0,aBone=0,aFakkeer=0;
     (cows[a.code]||[]).forEach(cow=>{
       if(!cow)return;
       const m=typeNet(cow.meatRows||[]),b=typeNet(cow.boneRows||[]);
-      aMeat+=m;aBone+=b;
-      allRows.push({id:cow.id,area:a.code,m,b});
+      const hasFk=cow.hasFakkeer||false;
+      const fk=hasFk?3.5:0;
+      const balM=Math.max(0,m-fk);
+      aMeatRaw+=balM;aBone+=b;aFakkeer+=fk;
+      allRows.push({id:cow.id,area:a.code,m:balM,b,fk});
     });
-    gMeat+=aMeat;gBone+=aBone;gPubM+=aMeat*2/3;gPubB+=aBone*2/3;
-    const aList=(cows[a.code]||[]).filter(c=>c);
-    let fakkeer=0,balMeatArea=0;
-    aList.forEach(c=>{
-      const cm=typeNet(c.meatRows||[]);
-      const hasFk=c.hasFakkeer||false;
-      const bm=hasFk?Math.max(0,cm-3.5):cm;
-      fakkeer+=hasFk?3.5:0;
-      balMeatArea+=bm;
-    });
-    const pubMeat=balMeatArea*2/3;
+    const pubMeat=aMeatRaw*2/3;
     const pubBone=aBone*2/3;
-    const balancePubMeat=pubMeat;
-    const grandTotal=balancePubMeat+fakkeer+pubBone;
+    const grandTotal=pubMeat+aFakkeer+pubBone;
+    gMeat+=pubMeat;gBone+=pubBone;gFk+=aFakkeer;
     const tr=document.createElement('tr');
     tr.innerHTML=`<td><strong style="color:#085041">${a.code}</strong> <span style="font-size:12px;color:#412402">${a.name}</span></td>
-      <td class="num">${balancePubMeat.toFixed(3)}</td>
-      <td class="num" style="color:#633806;font-style:italic">${fakkeer>0?fakkeer.toFixed(3):'—'}</td>
+      <td class="num">${pubMeat.toFixed(3)}</td>
+      <td class="num" style="color:#A35000">${aFakkeer>0?aFakkeer.toFixed(3):'—'}</td>
       <td class="num">${pubBone.toFixed(3)}</td>
       <td class="num" style="font-weight:700;color:#085041;background:#FAEEDA">${grandTotal.toFixed(3)}</td>`;
     tbody.appendChild(tr);
   });
+
   document.getElementById('grand-metrics').innerHTML=`
-    <div class="metric"><label>Total meat</label><span class="val">${gMeat.toFixed(2)}</span> <span class="unit">kg</span></div>
-    <div class="metric"><label>Total bone</label><span class="val">${gBone.toFixed(2)}</span> <span class="unit">kg</span></div>
-    <div class="metric"><label>Grand total</label><span class="val">${(gMeat+gBone).toFixed(2)}</span> <span class="unit">kg</span></div>
-    <div class="metric"><label>Public meat (2/3)</label><span class="val">${gPubM.toFixed(2)}</span> <span class="unit">kg</span></div>
-    <div class="metric"><label>Public bone (2/3)</label><span class="val">${gPubB.toFixed(2)}</span> <span class="unit">kg</span></div>
-    <div class="metric"><label>Total public</label><span class="val">${(gPubM+gPubB).toFixed(2)}</span> <span class="unit">kg</span></div>`;
+    <div class="metric"><label>Total meat (public)</label><span class="val">${gMeat.toFixed(2)}</span> <span class="unit">kg</span></div>
+    <div class="metric"><label>Total bone (public)</label><span class="val">${gBone.toFixed(2)}</span> <span class="unit">kg</span></div>
+    <div class="metric"><label>Total ഫക്കീർ</label><span class="val">${gFk.toFixed(2)}</span> <span class="unit">kg</span></div>
+    <div class="metric"><label>Grand total</label><span class="val">${(gMeat+gBone+gFk).toFixed(2)}</span> <span class="unit">kg</span></div>`;
+
   const allCard=document.getElementById('all-cows-card');
   if(!allRows.length){allCard.innerHTML=`<div style="font-size:13px;color:#854F0B;padding:4px">No buffaloes entered yet.</div>`;return;}
   allCard.innerHTML=`<div class="section-head" style="margin-bottom:8px"><i class="ti ti-list"></i>All buffaloes</div>
     <div style="overflow-x:auto"><table class="atbl"><thead><tr>
-      <th>Cow</th><th>Area</th><th style="text-align:right">Meat (kg)</th><th style="text-align:right">Bone (kg)</th><th style="text-align:right">Total (kg)</th><th style="text-align:right">Public (2/3)</th><th style="text-align:right">SH (1/3)</th>
+      <th>Buffalo</th><th>Area</th>
+      <th style="text-align:right">Meat</th><th style="text-align:right">Bone</th>
+      <th style="text-align:right">Fakkeer</th><th style="text-align:right">Total</th>
     </tr></thead><tbody>
     ${allRows.map(c=>`<tr>
       <td style="font-weight:700;color:#085041">${c.id}</td><td>${c.area}</td>
       <td class="num">${c.m.toFixed(3)}</td>
       <td class="num">${c.b.toFixed(3)}</td>
-      <td class="num" style="font-weight:700">${(c.m+c.b).toFixed(3)}</td>
-      <td class="num">${((c.m+c.b)*2/3).toFixed(3)}</td>
-      <td class="num green">${((c.m+c.b)/3).toFixed(3)}</td>
+      <td class="num" style="color:#A35000">${c.fk>0?c.fk.toFixed(3):'—'}</td>
+      <td class="num" style="font-weight:700">${(c.m+c.b+c.fk).toFixed(3)}</td>
     </tr>`).join('')}
     </tbody></table></div>`;
 }
