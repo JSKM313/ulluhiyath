@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mongam Mahallu Ulluhiyath Calculator</title>
+<title>Mongam Mahallu Ulluhiyath Calculator</title>a
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
@@ -127,6 +127,36 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
 .metric .val{font-size:18px;font-weight:700;color:#412402;font-family:'Amiri',serif}
 .metric .unit{font-size:11px;color:#854F0B;font-family:sans-serif}
 .footer{text-align:center;font-size:11px;color:#BA7517;padding:10px;font-family:sans-serif;letter-spacing:.04em;opacity:.7}
+.pdf-btn{display:flex;align-items:center;gap:6px;font-size:13px;background:#085041;color:#FAC775;border:none;border-radius:8px;padding:8px 16px;cursor:pointer;font-family:sans-serif;font-weight:600;margin-left:auto}
+.pdf-btn:hover{background:#04342C}
+.pdf-btn i{font-size:15px}
+
+@media print{
+  body{background:#fff;padding:0;display:block}
+  .app-header,.tab-bar,.sync-bar,.page-title,.footer{display:none!important}
+  .app-wrap{border:none;border-radius:0;max-width:100%;width:100%}
+  #page0{display:none!important}
+  #page1{display:flex!important;padding:0}
+  .pdf-btn{display:none!important}
+  .print-header{display:block!important}
+  .card{border:1px solid #ccc;border-radius:0;break-inside:avoid}
+  .metric{border:1px solid #ccc}
+  .atbl th{background:#085041!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .atbl tr:nth-child(even) td{background:#f9f6f0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .num{font-family:'Amiri',serif}
+}
+.print-header{display:none;text-align:center;padding:16px 0 10px;border-bottom:2px solid #085041;margin-bottom:12px}
+.print-header h2{font-size:22px;font-weight:700;color:#085041;font-family:'Amiri',serif}
+.print-header p{font-size:12px;color:#854F0B;font-family:sans-serif;margin-top:3px}
+.print-header .sponsor{font-size:13px;font-weight:600;color:#633806;font-family:sans-serif;margin-top:4px}
+.print-header .print-date{font-size:11px;color:#888;font-family:sans-serif;margin-top:2px}
+.fakkeer-bar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1.5px solid #BA7517}
+.fk-cell{padding:7px 10px;background:#FAEEDA}
+.fk-cell.fk-balance{background:#085041}
+.fkl{font-size:11px;color:#854F0B;margin-bottom:2px;font-family:sans-serif}
+.fk-cell.fk-balance .fkl{color:rgba(250,199,117,.7)}
+.fkv{font-size:15px;font-weight:700;color:#633806;font-family:'Amiri',serif}
+.fk-cell.fk-balance .fkv{color:#FAC775;font-size:16px}
 .loading-overlay{position:fixed;inset:0;background:rgba(248,240,225,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;gap:14px}
 .loading-overlay.hidden{display:none}
 .loading-spinner{width:40px;height:40px;border:3px solid #FAEEDA;border-top-color:#085041;border-radius:50%;animation:spin .8s linear infinite}
@@ -185,15 +215,25 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
   </div>
 
   <div class="page" id="page1">
+    <div class="print-header">
+      <h2>☽ Mongam Mahallu Ulluhiyath Calculator</h2>
+      <p>Bakreed Buffalo Allocation — Mahall Distribution System</p>
+      <div class="sponsor">Sponsored by SKSSF Mongam Unit</div>
+      <div class="print-date" id="print-date"></div>
+    </div>
     <div class="card">
-      <div class="section-head"><i class="ti ti-chart-bar"></i>Public share (2/3) &amp; shareholder (1/3) — per area</div>
+      <div class="section-head" style="display:flex;align-items:center;justify-content:space-between;border-bottom:none;padding-bottom:0">
+        <span style="display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;font-family:sans-serif;color:#854F0B;text-transform:uppercase;letter-spacing:.06em"><i class="ti ti-chart-bar" style="font-size:14px;color:#BA7517"></i>Public share (2/3) &amp; shareholder (1/3) — per area</span>
+        <button class="pdf-btn" onclick="downloadPDF()"><i class="ti ti-file-type-pdf"></i>Download PDF</button>
+      </div>
       <div style="overflow-x:auto">
         <table class="atbl">
           <thead><tr>
-            <th style="width:40%">Area</th>
-            <th style="width:20%;text-align:right">ഇറച്ചി (kg)</th>
-            <th style="width:20%;text-align:right">എല്ല് (kg)</th>
-            <th style="width:20%;text-align:right">ആകെ (kg)</th>
+            <th style="width:32%">Area</th>
+            <th style="width:17%;text-align:right">ഇറച്ചി (kg)</th>
+            <th style="width:17%;text-align:right">ഫക്കീർ (kg)</th>
+            <th style="width:17%;text-align:right">എല്ല് (kg)</th>
+            <th style="width:17%;text-align:right">ആകെ (kg)</th>
           </tr></thead>
           <tbody id="area-tbody"></tbody>
         </table>
@@ -381,6 +421,9 @@ function recalc(){
   set('sum-bone-sh',(bNet/3).toFixed(4));set('sum-bone-pub',(bNet*2/3).toFixed(4));
   set('sum-1sh-meat',(mNet/3/7).toFixed(4)+' kg');set('sum-1sh-bone',(bNet/3/7).toFixed(4)+' kg');
   set('cb-head-net',total.toFixed(3)+' kg');
+  set('ts-meat-pub2',(mNet*2/3).toFixed(4));
+  set('ts-meat-fakkeer','3.5000');
+  set('ts-meat-balance',Math.max(0,(mNet*2/3)-3.5).toFixed(4));
   const shN=parseInt(cow.shN)||0;
   const shM=(mNet/3/7)*shN,shB=(bNet/3/7)*shN;
   const em=document.getElementById('sh-res-meat'),eb=document.getElementById('sh-res-bone'),et=document.getElementById('sh-res-total');
@@ -443,6 +486,11 @@ function renderCowCalc(){
         <div class="ts-cell"><div class="tsl">SH (1/3)</div><div class="tsv green" id="ts-${type}-sh">${sh.toFixed(4)}</div></div>
         <div class="ts-cell"><div class="tsl">Public (2/3)</div><div class="tsv" id="ts-${type}-pub">${pub.toFixed(4)}</div></div>
       </div>
+      ${type==='meat'?`<div class="fakkeer-bar">
+        <div class="fk-cell"><div class="fkl">പൊതു ഇറച്ചി (2/3)</div><div class="fkv" id="ts-meat-pub2">${(net*2/3).toFixed(4)} kg</div></div>
+        <div class="fk-cell" style="background:#FFF3E0"><div class="fkl" style="color:#633806">( − ) ഫക്കീർ</div><div class="fkv" style="color:#A35000">3.5000 kg</div></div>
+        <div class="fk-cell fk-balance"><div class="fkl">ബാലൻസ് ഇറച്ചി</div><div class="fkv" id="ts-meat-balance">${Math.max(0,(net*2/3)-3.5).toFixed(4)} kg</div></div>
+      </div>`:''}
     </div>`;
   }
 
@@ -496,11 +544,18 @@ function renderPage2(){
       allRows.push({id:cow.id,area:a.code,m,b});
     });
     gMeat+=aMeat;gBone+=aBone;gPubM+=aMeat*2/3;gPubB+=aBone*2/3;
+    const numBuffaloes=cows[a.code].filter(c=>c).length;
+    const fakkeer=numBuffaloes*3.5;
+    const pubMeat=aMeat*2/3;
+    const pubBone=aBone*2/3;
+    const balancePubMeat=Math.max(0,pubMeat-fakkeer);
+    const grandTotal=balancePubMeat+fakkeer+pubBone;
     const tr=document.createElement('tr');
     tr.innerHTML=`<td><strong style="color:#085041">${a.code}</strong> <span style="font-size:12px;color:#412402">${a.name}</span></td>
-      <td class="num">${aMeat.toFixed(3)}</td>
-      <td class="num">${aBone.toFixed(3)}</td>
-      <td class="num" style="font-weight:700;color:#085041;background:#FAEEDA">${(aMeat+aBone).toFixed(3)}</td>`;
+      <td class="num">${balancePubMeat.toFixed(3)}</td>
+      <td class="num" style="color:#633806;font-style:italic">${fakkeer.toFixed(3)}</td>
+      <td class="num">${pubBone.toFixed(3)}</td>
+      <td class="num" style="font-weight:700;color:#085041;background:#FAEEDA">${grandTotal.toFixed(3)}</td>`;
     tbody.appendChild(tr);
   });
   document.getElementById('grand-metrics').innerHTML=`
@@ -534,6 +589,12 @@ setInterval(()=>{
   if(!saveTimer){
     loadFromSupabase();
 setInterval(()=>{ if(!saveTimer){ loadFromSupabase(); } }, 30000);
+
+function downloadPDF(){
+  document.getElementById('print-date').textContent='Date: '+new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'});
+  renderPage2();
+  setTimeout(()=>window.print(),200);
+}
   }
 }, 30000); }, 30000);
 </script>
