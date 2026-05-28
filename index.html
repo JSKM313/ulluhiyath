@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mongam Mahallu Ulluhiyath Calculator</title>a
+<title>Mongam Mahallu Ulluhiyath Calculator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
@@ -222,10 +222,7 @@ body{background:#f5f0e8;min-height:100vh;display:flex;flex-direction:column;alig
       <div class="print-date" id="print-date"></div>
     </div>
     <div class="card">
-      <div class="section-head" style="display:flex;align-items:center;justify-content:space-between;border-bottom:none;padding-bottom:0">
-        <span style="display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;font-family:sans-serif;color:#854F0B;text-transform:uppercase;letter-spacing:.06em"><i class="ti ti-chart-bar" style="font-size:14px;color:#BA7517"></i>Public share (2/3) &amp; shareholder (1/3) — per area</span>
-        <button class="pdf-btn" onclick="downloadPDF()"><i class="ti ti-file-type-pdf"></i>Download PDF</button>
-      </div>
+      <div class="section-head"><i class="ti ti-chart-bar"></i>Public share (2/3) &amp; shareholder (1/3) — per area</div>
       <div style="overflow-x:auto">
         <table class="atbl">
           <thead><tr>
@@ -590,11 +587,7 @@ setInterval(()=>{
     loadFromSupabase();
 setInterval(()=>{ if(!saveTimer){ loadFromSupabase(); } }, 30000);
 
-function downloadPDF(){
-  document.getElementById('print-date').textContent='Date: '+new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'});
-  renderPage2();
-  setTimeout(()=>window.print(),200);
-}
+
   }
 }, 30000); }, 30000);
 </script>
